@@ -21,10 +21,9 @@ async function getData() {
       throw new Error(response);
     } else {
       //convert promise to json
-      const data = response.json();
-      console.log(data);
+      const data = await response.json();
+      console.log(data); //unique to THIS API
       cards(data);
-      //unique to THIS API
     }
   } catch (error) {
     console.error("Does not work");
@@ -36,9 +35,9 @@ function cards(data) {
   data.forEach((element) => {
     const specific = `<div class="card"> 
           <h2 class="Title">${element["name"]}</h2> 
-          <p class="Description">Price: ${element["price"]}</p> 
-          <p class="Description">Sale Price: ${element["salePrice"]}</p> 
-          <p class="Description">Brand: ${element["brand"]}</p> 
+          <p class="Description">Capital: ${element["capital"]}</p> 
+          <p class="Description">Phone Code: ${element["phonecode"]}</p> 
+          <p class="Description">Currency: ${element["currency"]}</p> 
           <p class="Description">Features: ${element["features"]}</p> 
           <img src="${element["img"]}" alt="${element["name"]}" class="Image"></img>
       </div>`;
@@ -47,4 +46,3 @@ function cards(data) {
   });
 }
 getData();
-cards();
