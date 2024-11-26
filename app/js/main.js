@@ -33,7 +33,7 @@ async function getData() {
 function cards(data) {
   // document.querySelector(".container").innerHTML = "";
   data.forEach((element) => {
-    const specific = `<div class="card bg-white shadow-lg rounded-lg p-4 flex flex-col items-center w-72 h-96">
+    const specific = `<div class="card w-[17rem] h-[17rem] bg-none flex flex-col items-center justify-center rounded-xl m-4 shadow-lg bg-center bg-cover ">
           <h2 class="Title">${element["name"]}</h2> 
           <p class="Description">Capital: ${element["capital"]}</p> 
           <p class="Description">Phone Code: ${element["phonecode"]}</p> 
