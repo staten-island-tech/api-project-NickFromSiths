@@ -37,44 +37,45 @@ function cards(data) {
   data.forEach((element) => {
     const specific = `<button class="country"><div class="card w-[17rem] h-[17rem] leading-loose bg-none flex flex-col items-center justify-center rounded-xl m-4 shadow-lg bg-center bg-cover ">
           <h1 class="Title font-black text-2xl">${element["name"]}</h2> 
-          <h5 class="font-light ">click me</h5>
+          <h5 class="font-normal ">click me</h5>
           <p id="description" class="description text-xs text-transparent">${element["iso2"]}</p> 
       </div></button>`;
-       
+
     DOMSelectors.container.insertAdjacentHTML("beforeend", specific);
   });
 }
 getData();
 
-DOMSelectors.container.addEventListener("click", function(event){
+DOMSelectors.container.addEventListener("click", function (event) {
   event.preventDefault();
   const card = event.target.closest(".card");
   const name = card.querySelector(".description").textContent;
   console.log(card);
   console.log(name);
   countryData(name);
-})
+});
 
-async function countryData(name){
+async function countryData(name) {
   try {
-    const respons = await fetch(`https://api.countrystatecity.in/v1/countries/${name}`, { method: "GET", headers });
+    const respons = await fetch(
+      `https://api.countrystatecity.in/v1/countries/${name}`,
+      { method: "GET", headers }
+    );
     if (respons.status != 200) {
       throw new Error(respons);
-    } 
-    else {
+    } else {
       //convert promise to json
       const newData = await respons.json();
       console.log(newData); //unique to THIS API
       Newdata(newData);
-      
-    };
+    }
   } catch (error) {
     console.error("Does not work");
   }
 }
 
-function Newdata(newData){
-document.querySelector(".container").innerHTML = "";
+function Newdata(newData) {
+  document.querySelector(".container").innerHTML = "";
   const specific = `
   
     <button class="country"><div class=" w-[90vh] h-[70vh] leading-loose bg-none flex flex-col items-center justify-center rounded-xl m-4 shadow-lg bg-center bg-cover ">
@@ -89,17 +90,14 @@ document.querySelector(".container").innerHTML = "";
       <img src="${newData["img"]}" alt="${newData["name"]}" class="Image"></img>
       <p id="description" class="text-xs text-transparent">${newData["iso2"]}</p> 
     </div></button>`;
-     
+
   DOMSelectors.container.insertAdjacentHTML("beforeend", specific);
 }
 
-
-DOMSelectors.resethtml.addEventListener("click", function(event){
+DOMSelectors.resethtml.addEventListener("click", function (event) {
   event.preventDefault();
   getData();
-})
-
-
+});
 
 /* <div class="card w-[17rem] h-[17rem] bg-none flex flex-col items-center justify-center rounded-xl m-4 shadow-lg bg-center bg-cover ">
           <h2 class="Title">${element["name"]}</h2> 
